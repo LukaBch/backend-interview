@@ -15,6 +15,12 @@ Then, install the dependencies:
 pip install -r requirements.txt
 ```
 
+Then, apply the migrations:
+
+```bash
+pip manage.py migrate
+```
+
 Create a user for your application:
 
 ```bash
