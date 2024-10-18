@@ -39,3 +39,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             answer.selected = answer_dict["selected"]
             answer.user_text = answer_dict["user_text"]
             answer.save()
+
+
+class TokenSerializer(serializers.Serializer):
+    questionnaire_id = serializers.IntegerField()

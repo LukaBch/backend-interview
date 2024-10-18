@@ -52,3 +52,11 @@ class AuthenticatedQuestionTest(APITestCase):
         response = self.client.get("/questionnaires/questions/")
         self.assertEqual(response.json()[0]["status"], "ANSWERED")
         self.assertEqual(response.json()[0]["answers"][0]["user_text"], text)
+
+
+### TO DO ###
+# Test /token route : an object ExpiringToken should be created with correct expiration date
+# Test routes related to QuestionViewSet (GET/PUT)
+# # with a valid token : should be able to GET/PUT
+# # with an invalid token : should fail
+# # with an expired token : should fail

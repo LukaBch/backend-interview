@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+import secrets
 
 
 class Questionnaire(models.Model):
@@ -51,3 +53,20 @@ class Answer(models.Model):
         help_text="Text written by the user for FREE_TEXT questions",
     )
     selected = models.BooleanField(default=False)
+
+class ExpiringToken(models.Model):
+    key = models.CharField(max_length=40, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    expiration = models.DateTimeField()
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+
+    def has_expired(self):
+        return timezone.now() >= self.expiration
+
+    def save(self, *args, **kwargs):
+        if not self.key:
+            self.key = secrets.token_urlsafe(20)
+
+        if not self.expiration:
+            self.expiration = timezone.now() + timezone.timedelta(days=7)
+        super().save(*args, **kwargs)
