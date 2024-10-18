@@ -29,7 +29,7 @@ class QuestionViewSet(ListModelMixin, UpdateModelMixin, GenericViewSet):
 
     def get_queryset(self):
         if isinstance(self.request.auth, ExpiringToken):
-            return super().get_queryset().filter(questionnaire=self.request.auth.token.questionnaire)
+            return super().get_queryset().filter(questionnaire=self.request.auth.questionnaire)
         return super().get_queryset().filter(questionnaire__user=self.request.user)
 
 

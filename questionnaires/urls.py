@@ -7,5 +7,5 @@ router = DefaultRouter()
 router.register(r"questions", QuestionViewSet, basename="questions")
 router.register(r"questionnaires", QuestionnaireViewSet, basename="questionnaires")
 urlpatterns = router.urls + [
-    path('tokens/', TokenCreateView.as_view(), name='create-token'),
+    path('token/', TokenCreateView.as_view(), name='create-token'),
 ]
